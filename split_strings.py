@@ -5,3 +5,8 @@ def solution(arr):
     if len(arr) % 2 == 1:
         arr2[-1] += '_' # adiciona um underline caso a string possua tamanho impar
     return arr2
+
+arr = ['empty', 'corner', 'farm', 'independent']
+
+for element in arr:
+    print(solution(element))
