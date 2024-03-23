@@ -1,4 +1,4 @@
-def solution(r, g, b):
+def rgb(r, g, b):
     if r > 255:
         r = 255
     elif r < 0:
@@ -12,15 +12,14 @@ def solution(r, g, b):
     elif b < 0:
         b = 0
         
-    return ('' + hex(r)[2:] + hex(g)[2:] + hex(b)[2:]).upper()
+    return ('' + hex(r)[2:].zfill(2) + hex(g)[2:].zfill(2) + hex(b)[2:].zfill(2)).upper()
 
-# 255, 255, 255
-# 255, 255, 300
-# 0, 0, 0
-# 148, 0, 211
+# def rgb(r, g, b):
+#     clamp = lambda x: max(0, min(x, 255))
+#     return "%02X%02X%02X" % (clamp(r), clamp(g), clamp(b))
 
-r = 255
-g = 255
-b = 300
+r = 148
+g = 0
+b = 211
 
-solution(r, g, b)
+rgb(r, g, b)
