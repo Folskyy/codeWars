@@ -4,14 +4,19 @@ class User():
         self.progress = 0
 
     def up_rank(self):
+        if self.rank == 8:
+            self.progress = 0
+            return
+        
         while self.progress >= 100:
-            temp = self.progress - 100
-
-            if self.rank == 8:
+            if self.rank == 7:
+                self.rank += 1
                 self.progress = 0
                 break
+
+            temp = self.progress - 100
             
-            elif self.rank == -1:
+            if self.rank == -1:
                 self.rank += 2
 
             else:
@@ -20,15 +25,16 @@ class User():
             self.progress = temp
     
     def inc_progress(self, task_rank):
-        if task_rank < -8 or task_rank > 8:
-            return ValueError
+        if task_rank < -8 or task_rank > 8 or task_rank == 0:
+            raise ValueError
+        if self.rank == 8:
+            return
 
         if task_rank == self.rank:
             self.progress += 3
         
         if task_rank == self.rank - 1:
             self.progress += 1
-        
         if task_rank == -1 and self.rank == 1:
             self.progress += 1
 
@@ -41,10 +47,7 @@ class User():
                 self.progress += 10 * dif * dif
 
         self.up_rank()
-
 user = User()
-user.rank # => -8
-user.progress # => 0
 user.inc_progress(1)
 user.inc_progress(1)
 user.inc_progress(1)
@@ -52,18 +55,33 @@ user.inc_progress(1)
 user.inc_progress(1)
 user.inc_progress(2)
 user.inc_progress(2)
-user.rank # => -8
-user.progress # => 0
 user.inc_progress(-1)
-user.rank # => -8
-user.progress # => 21
 user.inc_progress(3)
 user.inc_progress(8)
-user.progress # => 10
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.inc_progress(8)
+user.progress
 user.rank
-user.inc_progress(1) # will add 90 progress
-user.progress # => 0 # progress is now zero
-user.rank # => -7 # rank was upgraded to -7
+user.inc_progress(8)
+user.progress
+user.rank
+user.inc_progress(8)
+user.progress
+user.rank
+user = User()
+user.inc_progress(9)
+user.inc_progress(-9)
+user.inc_progress(0)
+user = User()
+user.inc_progress(5)
+user.inc_progress(3)
+user.inc_progress(6)
             
         
 
